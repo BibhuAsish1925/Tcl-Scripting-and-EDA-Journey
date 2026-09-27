@@ -1,0 +1,249 @@
+PHASE 03 — PROCEDURES
+======================
+
+Purpose
+-------
+Tcl procedures are reusable blocks of code that help organize scripts,
+reduce repeated code, and make automation scripts easier to maintain.
+
+Procedures are especially useful when the same operation needs to be
+performed multiple times with different input values.
+
+
+1. Creating a Procedure
+-----------------------
+
+Syntax:
+
+proc procedure_name {parameters} {
+    # procedure body
+}
+
+Example:
+
+proc greet {} {
+    puts "Hello from Tcl procedure!"
+}
+
+greet
+
+A procedure is created using the "proc" command.
+
+The procedure is executed by calling its name.
+
+
+2. Procedure Arguments
+----------------------
+
+Arguments allow values to be passed into a procedure.
+
+Example:
+
+proc greet {name role} {
+    puts "Name: $name"
+    puts "Role: $role"
+}
+
+greet "Bibhu" "Tcl Learner"
+
+Here:
+
+name and role are procedure parameters.
+
+The values "Bibhu" and "Tcl Learner" are passed when the procedure
+is called.
+
+
+3. Multiple Arguments
+---------------------
+
+A procedure can accept multiple parameters.
+
+Example:
+
+proc add {a b} {
+    return [expr {$a + $b}]
+}
+
+set result [add 10 20]
+
+Parameters are accessed using the $ prefix inside the procedure.
+
+
+4. Return Values
+----------------
+
+The "return" command sends a value back to the caller.
+
+Example:
+
+proc add_numbers {a b} {
+    return [expr {$a + $b}]
+}
+
+set result [add_numbers 20 15]
+
+puts $result
+
+The returned value can be stored in a variable or used directly
+inside another command.
+
+Example:
+
+puts "Result: [add_numbers 5 10]"
+
+
+5. Variable Scope
+-----------------
+
+Variables created inside a procedure are normally local to that
+procedure.
+
+Example:
+
+set message "Global message"
+
+proc show_message {} {
+    set message "Local message"
+    puts $message
+}
+
+show_message
+
+puts $message
+
+The two variables named "message" are different because they exist
+in different scopes.
+
+
+6. Global Variables
+-------------------
+
+The "global" command allows a procedure to access a variable that
+was created outside the procedure.
+
+Example:
+
+set counter 0
+
+proc increment_counter {} {
+    global counter
+    incr counter
+}
+
+increment_counter
+
+puts $counter
+
+Without the "global" command, the procedure would treat "counter"
+as a local variable.
+
+
+7. Procedure Structure
+----------------------
+
+A typical Tcl procedure follows this structure:
+
+proc procedure_name {arguments} {
+
+    # Processing
+
+    return result
+}
+
+Example:
+
+proc multiply {a b} {
+    return [expr {$a * $b}]
+}
+
+set result [multiply 5 4]
+
+
+8. Important Commands
+---------------------
+
+proc
+    Creates a procedure.
+
+return
+    Returns a value from a procedure.
+
+global
+    Makes a global variable accessible inside a procedure.
+
+expr
+    Performs calculations inside procedures.
+
+incr
+    Increments a variable.
+
+set
+    Creates or modifies variables.
+
+
+9. Why Procedures Matter in Automation
+---------------------------------------
+
+Procedures are important for larger Tcl automation scripts because
+they allow repeated operations to be written only once.
+
+Examples:
+
+- Processing multiple files
+- Checking module status
+- Parsing report data
+- Calculating statistics
+- Generating reports
+- Running repeated tool commands
+- Validating input data
+
+Instead of repeating the same code, create a procedure and call it
+whenever the operation is required.
+
+
+10. Key Concepts Learned
+------------------------
+
+- Creating reusable procedures
+- Calling procedures
+- Passing arguments
+- Using multiple parameters
+- Returning values
+- Storing returned values
+- Local variable scope
+- Global variable access
+- Reusing code through procedures
+
+
+11. Phase 03 Exercises
+----------------------
+
+10_basic_procedure.tcl
+    Basic procedure creation and calling.
+
+11_arguments.tcl
+    Passing arguments to procedures.
+
+12_return_values.tcl
+    Returning and using values from procedures.
+
+13_scope.tcl
+    Understanding local and global variable scope.
+
+
+Phase Completion
+----------------
+
+Phase 03 introduced Tcl procedures and the concepts required to
+organize reusable Tcl code.
+
+The next phase is:
+
+Phase 04 — String Processing
+
+Topics:
+- String operations
+- String formatting
+- String parsing
+- Text processing
