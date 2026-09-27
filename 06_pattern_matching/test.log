@@ -1,0 +1,4 @@
+INFO: UART test started
+PASS: UART communication successful
+ERROR: SPI communication failed
+INFO: Test completed

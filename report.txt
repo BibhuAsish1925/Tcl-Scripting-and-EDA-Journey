@@ -1,5 +1,0 @@
-Tcl Automation Report
----------------------
-UART : PASS
-SPI  : PASS
-I2C  : FAIL
