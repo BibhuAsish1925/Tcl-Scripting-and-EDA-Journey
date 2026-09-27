@@ -1,0 +1,371 @@
+PHASE 08 — AUTOMATION UTILITIES
+===============================
+
+Purpose
+-------
+Automation utilities allow Tcl scripts to interact with the operating
+system, use environment variables, accept command-line arguments,
+and perform complete automation tasks.
+
+This phase moves from individual Tcl concepts toward practical,
+reusable automation scripts.
+
+
+1. Executing External Commands
+------------------------------
+
+The "exec" command runs an external operating-system command.
+
+Syntax:
+
+exec command
+
+Example:
+
+set result [exec echo "Hello from Tcl"]
+
+puts $result
+
+The output of the external command can be stored in a Tcl variable.
+
+On Windows, commands can also be executed through cmd.
+
+Example:
+
+set result [exec cmd /c echo "Hello from Windows"]
+
+
+2. Environment Variables
+------------------------
+
+Tcl provides access to operating-system environment variables through
+the built-in "env" array.
+
+Example:
+
+puts "Operating System: $::env(OS)"
+
+The "::" refers to the global namespace.
+
+Environment variables can provide information such as:
+
+- Operating system
+- Username
+- System paths
+- Tool installation paths
+- Configuration information
+
+
+3. The env Array
+----------------
+
+The environment variables are stored as elements of the Tcl array
+named "env".
+
+Example:
+
+$::env(OS)
+
+$::env(USERNAME)
+
+The exact available environment variables depend on the operating
+system and system configuration.
+
+
+4. Command-Line Arguments
+-------------------------
+
+Tcl provides two important variables for command-line arguments:
+
+argc
+    Number of arguments supplied to the script.
+
+argv
+    List containing the supplied arguments.
+
+Example:
+
+puts "Number of arguments: $argc"
+puts "Arguments: $argv"
+
+If the script is run as:
+
+tclsh script.tcl UART PASS
+
+then:
+
+argc = 2
+
+argv = UART PASS
+
+
+5. Accessing Individual Arguments
+---------------------------------
+
+Since argv is a Tcl list, list commands can be used to access
+individual arguments.
+
+Example:
+
+set module [lindex $argv 0]
+
+If the command is:
+
+tclsh script.tcl UART PASS
+
+then:
+
+[lindex $argv 0] -> UART
+[lindex $argv 1] -> PASS
+
+
+6. Validating Command-Line Arguments
+-------------------------------------
+
+A script can check whether the required number of arguments was
+provided.
+
+Example:
+
+if {$argc != 1} {
+    puts "Usage: tclsh script.tcl <module>"
+    exit 1
+}
+
+This prevents the script from continuing with incomplete input.
+
+
+7. The exit Command
+-------------------
+
+The "exit" command terminates the Tcl script.
+
+Example:
+
+exit 1
+
+The value passed to exit is the script's exit status.
+
+Common convention:
+
+exit 0
+    Successful completion.
+
+exit 1
+    Indicates an error or unsuccessful execution.
+
+
+8. Combining Tcl Features
+-------------------------
+
+A practical automation script can combine concepts learned in
+previous phases:
+
+- Variables
+- Conditions
+- Lists
+- Procedures
+- Strings
+- File operations
+- Pattern matching
+- Error handling
+- Command-line arguments
+
+
+9. Complete Automation Flow
+---------------------------
+
+A typical automation script can follow this structure:
+
+Command-line input
+        |
+        v
+Read arguments
+        |
+        v
+Validate input
+        |
+        v
+Process data
+        |
+        v
+Execute commands
+        |
+        v
+Generate output/report
+        |
+        v
+Finish successfully
+
+
+10. Generating Reports
+----------------------
+
+Tcl can create reports by combining file operations with automation.
+
+Example:
+
+set file [open "report.txt" w]
+
+puts $file "Module Report"
+puts $file "-------------"
+puts $file "Module: UART"
+puts $file "Status: PASS"
+
+close $file
+
+This creates a text report automatically.
+
+
+11. Practical Automation Uses
+-----------------------------
+
+Automation utilities can be used for:
+
+- Running external tools
+- Automating command-line workflows
+- Processing tool output
+- Generating reports
+- Passing design names to scripts
+- Selecting files from command-line arguments
+- Using system configuration
+- Creating reusable automation scripts
+- Connecting Tcl with EDA tools
+
+
+12. EDA Automation Applications
+-------------------------------
+
+These concepts are particularly useful in EDA workflows.
+
+For example, a Tcl script can:
+
+1. Receive a design name from the command line.
+2. Locate design files.
+3. Execute an EDA tool command.
+4. Capture tool output.
+5. Parse the generated report.
+6. Generate a summary report.
+
+Example flow:
+
+Design name
+    |
+    v
+Tcl script
+    |
+    v
+EDA tool command
+    |
+    v
+Tool output
+    |
+    v
+Tcl processing
+    |
+    v
+Summary report
+
+
+13. Important Commands and Variables
+------------------------------------
+
+exec
+    Executes an external command.
+
+env
+    Tcl array containing environment variables.
+
+argc
+    Number of command-line arguments.
+
+argv
+    List of command-line arguments.
+
+lindex
+    Accesses an individual argument.
+
+exit
+    Terminates the script with an exit status.
+
+open
+    Opens a file.
+
+puts
+    Writes output to the console or an opened file.
+
+close
+    Closes an opened file.
+
+
+14. Error Handling in Automation
+--------------------------------
+
+Automation scripts should validate input and handle errors.
+
+Example:
+
+if {$argc != 1} {
+    puts "Usage: tclsh script.tcl <module>"
+    exit 1
+}
+
+This prevents incorrect usage.
+
+The "catch" command from Phase 07 can also be combined with
+automation commands to handle failures safely.
+
+
+15. Key Concepts Learned
+------------------------
+
+- Executing external commands
+- Using exec
+- Accessing environment variables
+- Understanding the env array
+- Using argc
+- Using argv
+- Processing command-line arguments
+- Validating script input
+- Using exit status codes
+- Generating reports
+- Combining multiple Tcl concepts
+- Building complete automation scripts
+
+
+16. Phase 08 Exercises
+----------------------
+
+30_command_execution.tcl
+    Execute an external operating-system command.
+
+31_environment_variables.tcl
+    Access environment variables.
+
+32_arguments.tcl
+    Read and process command-line arguments.
+
+33_automation_script.tcl
+    Combine command-line arguments, validation, and file generation
+    into a simple automation script.
+
+
+Phase Completion
+----------------
+
+Phase 08 introduced practical Tcl automation utilities and showed
+how individual Tcl concepts can be combined into complete scripts.
+
+The next phase focuses specifically on applying Tcl to EDA-style
+automation workflows.
+
+Next phase:
+
+Phase 09 — EDA Workflows
+
+Topics:
+- File reporter
+- Log analyzer
+- Timing report parser
+- Cell statistics
+- Complete EDA automation flow

@@ -1,0 +1,4 @@
+Module Report
+-------------
+Module: UART
+Status: PASS
