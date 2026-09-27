@@ -1,0 +1,6 @@
+INFO: Synthesis started
+PASS: RTL compilation successful
+WARNING: Unconnected signal detected
+PASS: Synthesis completed
+ERROR: Timing constraint missing
+INFO: Flow completed
