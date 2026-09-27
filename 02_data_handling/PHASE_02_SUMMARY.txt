@@ -1,0 +1,619 @@
+============================================================
+PHASE 02 — DATA HANDLING
+============================================================
+
+Purpose:
+Learn how Tcl handles collections and structured data using
+lists, arrays, dictionaries, and nested data structures.
+
+These concepts are important for automation because scripts
+often need to store, search, modify, and process groups of
+files, modules, configurations, and report data.
+
+============================================================
+1. LISTS
+============================================================
+
+A Tcl list is an ordered collection of elements.
+
+Example:
+
+set modules {ALU FIFO UART SPI I2C}
+
+A list maintains the order of its elements.
+
+List indexes start from 0.
+
+Example:
+
+ALU   -> index 0
+FIFO  -> index 1
+UART  -> index 2
+SPI   -> index 3
+I2C   -> index 4
+
+
+============================================================
+2. llength
+============================================================
+
+"llength" returns the number of elements in a list.
+
+Example:
+
+set modules {ALU FIFO UART SPI I2C}
+
+llength $modules
+
+Result:
+
+5
+
+
+============================================================
+3. lindex
+============================================================
+
+"lindex" retrieves an element using its index.
+
+Example:
+
+lindex $modules 2
+
+Result:
+
+UART
+
+
+The keyword "end" can be used to access the last element.
+
+Example:
+
+lindex $modules end
+
+Result:
+
+I2C
+
+
+============================================================
+4. lrange
+============================================================
+
+"lrange" extracts a portion of a list.
+
+Syntax:
+
+lrange list first_index last_index
+
+Example:
+
+lrange $modules 0 2
+
+Result:
+
+ALU FIFO UART
+
+
+============================================================
+5. lsearch
+============================================================
+
+"lsearch" searches for an element in a list and returns
+its index.
+
+Example:
+
+lsearch $modules SPI
+
+Result:
+
+3
+
+
+If the element is not found, lsearch normally returns:
+
+-1
+
+
+============================================================
+6. linsert
+============================================================
+
+"linsert" inserts one or more elements at a specified
+position.
+
+Example:
+
+set modules [linsert $modules 2 GPIO]
+
+If the original list is:
+
+ALU FIFO UART SPI I2C
+
+Result:
+
+ALU FIFO GPIO UART SPI I2C
+
+
+============================================================
+7. lreplace
+============================================================
+
+"lreplace" replaces one or more elements in a list.
+
+Example:
+
+set modules [lreplace $modules 0 0 CPU]
+
+This replaces the element at index 0.
+
+Result:
+
+CPU FIFO GPIO UART SPI I2C
+
+
+============================================================
+8. lsort
+============================================================
+
+"lsort" returns a sorted version of a list.
+
+Example:
+
+lsort $modules
+
+Result:
+
+CPU FIFO GPIO I2C SPI UART
+
+
+============================================================
+9. TCL ARRAYS
+============================================================
+
+A Tcl array stores values using named keys.
+
+Example:
+
+array set module_status {
+    ALU  PASS
+    FIFO PASS
+    UART FAIL
+    SPI  PASS
+}
+
+
+Array elements can be accessed using:
+
+array_name(key)
+
+Example:
+
+puts $module_status(UART)
+
+Result:
+
+FAIL
+
+
+============================================================
+10. array set
+============================================================
+
+"array set" initializes multiple array elements.
+
+Example:
+
+array set module_status {
+    ALU  PASS
+    FIFO PASS
+    UART FAIL
+    SPI  PASS
+}
+
+
+============================================================
+11. array names
+============================================================
+
+"array names" returns the keys currently stored in an array.
+
+Example:
+
+array names module_status
+
+The returned order is not guaranteed.
+
+
+============================================================
+12. info exists
+============================================================
+
+"info exists" checks whether a variable or array element
+exists.
+
+Example:
+
+info exists module_status(SPI)
+
+Result:
+
+1
+
+
+A result of:
+
+1 -> element exists
+0 -> element does not exist
+
+
+============================================================
+13. Adding or Updating Array Elements
+============================================================
+
+An array element can be added or modified using "set".
+
+Example:
+
+set module_status(I2C) PASS
+
+If I2C does not exist, it is added.
+
+If it already exists, its value is updated.
+
+
+============================================================
+14. DICTIONARIES
+============================================================
+
+A Tcl dictionary stores key-value pairs in a single variable.
+
+Example:
+
+set module {
+    name UART
+    protocol Serial
+    width 8
+    status PASS
+}
+
+
+Conceptually:
+
+name     -> UART
+protocol -> Serial
+width    -> 8
+status   -> PASS
+
+
+============================================================
+15. dict get
+============================================================
+
+"dict get" retrieves a value using its key.
+
+Example:
+
+dict get $module name
+
+Result:
+
+UART
+
+
+Another example:
+
+dict get $module width
+
+Result:
+
+8
+
+
+============================================================
+16. dict set
+============================================================
+
+"dict set" adds or updates a key-value pair.
+
+Example:
+
+dict set module frequency 115200
+
+The dictionary now contains:
+
+frequency -> 115200
+
+
+============================================================
+17. dict keys
+============================================================
+
+"dict keys" returns the keys stored in a dictionary.
+
+Example:
+
+dict keys $module
+
+Example result:
+
+name protocol width status frequency
+
+
+============================================================
+18. Creating Dictionaries with dict create
+============================================================
+
+A dictionary can be created using "dict create".
+
+Example:
+
+set project [dict create \
+    name "UART Controller" \
+    language "Verilog" \
+    protocols {UART SPI I2C} \
+    status "Completed"
+]
+
+
+This creates one dictionary containing several key-value
+pairs.
+
+
+============================================================
+19. NESTED DATA
+============================================================
+
+Tcl data structures can contain other Tcl data structures.
+
+For example, a dictionary can contain a list.
+
+Example:
+
+set project [dict create \
+    name "UART Controller" \
+    language "Verilog" \
+    protocols {UART SPI I2C} \
+    status "Completed"
+]
+
+
+Here:
+
+project
+  |
+  +-- name      -> UART Controller
+  +-- language  -> Verilog
+  +-- protocols -> {UART SPI I2C}
+  +-- status    -> Completed
+
+
+The "protocols" value is itself a list.
+
+
+============================================================
+20. ACCESSING NESTED DATA
+============================================================
+
+First retrieve the list from the dictionary:
+
+set protocols [dict get $project protocols]
+
+Then list commands can be used on it:
+
+llength $protocols
+lindex $protocols 0
+
+
+Example:
+
+puts [lindex $protocols 0]
+
+Result:
+
+UART
+
+
+============================================================
+21. LIST VS ARRAY VS DICTIONARY
+============================================================
+
+LIST
+
+Purpose:
+Ordered collection of values.
+
+Example:
+
+set tools {Tcl Verilog Python Git}
+
+
+ARRAY
+
+Purpose:
+Key-based collection where elements behave like separate
+variables.
+
+Example:
+
+set status(UART) PASS
+
+
+DICTIONARY
+
+Purpose:
+Key-value data stored together in one variable.
+
+Example:
+
+set module {
+    name UART
+    status PASS
+}
+
+
+General idea:
+
+List       -> ordered values
+Array      -> keyed variables
+Dictionary -> structured key-value data
+
+
+============================================================
+22. IMPORTANT TCL COMMANDS LEARNED
+============================================================
+
+llength
+    Return the number of elements in a list.
+
+lindex
+    Retrieve an element from a list.
+
+lrange
+    Extract part of a list.
+
+lsearch
+    Search for an element in a list.
+
+linsert
+    Insert elements into a list.
+
+lreplace
+    Replace elements in a list.
+
+lsort
+    Sort a list.
+
+array set
+    Initialize an array.
+
+array names
+    Return array keys.
+
+info exists
+    Check whether a variable or array element exists.
+
+dict create
+    Create a dictionary.
+
+dict get
+    Retrieve a dictionary value.
+
+dict set
+    Add or update a dictionary key-value pair.
+
+dict keys
+    Return dictionary keys.
+
+
+============================================================
+23. PRACTICAL AUTOMATION USES
+============================================================
+
+Lists can be used for:
+
+- File names
+- Module names
+- Signal names
+- Tool names
+- Source files
+- Processing queues
+
+
+Arrays can be useful for:
+
+- Status tracking
+- Key-based lookup
+- Counters
+- Configuration values
+- Per-module information
+
+
+Dictionaries can be useful for:
+
+- Configuration data
+- Structured reports
+- Module information
+- Tool settings
+- Parsed data
+
+
+Nested structures are useful when information has multiple
+levels.
+
+Example:
+
+Project
+  |
+  +-- Module
+       |
+       +-- Name
+       +-- Status
+       +-- Protocols
+       +-- Configuration
+
+
+============================================================
+24. KEY CONCEPTS TO REMEMBER
+============================================================
+
+1. Tcl lists are ordered collections.
+
+2. Tcl list indexes start at 0.
+
+3. lindex retrieves an element.
+
+4. lrange extracts part of a list.
+
+5. lsearch finds an element's index.
+
+6. linsert adds elements at a specified position.
+
+7. lreplace modifies elements in a list.
+
+8. lsort returns a sorted list.
+
+9. Arrays use named keys.
+
+10. Array elements are accessed using:
+    array_name(key)
+
+11. info exists can check whether an array element exists.
+
+12. Dictionaries store key-value pairs in one variable.
+
+13. dict get retrieves dictionary values.
+
+14. dict set adds or updates dictionary values.
+
+15. A dictionary can contain a list.
+
+16. Tcl structures can be combined to represent
+    more complex data.
+
+
+============================================================
+PHASE 02 COMPLETE
+============================================================
+
+Exercises completed:
+
+06_list_operations.tcl
+07_arrays.tcl
+08_dictionaries.tcl
+09_nested_data.tcl
+
+Main topics:
+
+List manipulation
+Arrays
+Dictionaries
+Nested data
+Key-value storage
+Structured data
+
+Next phase:
+
+PHASE 03 — PROCEDURES
+============================================================
