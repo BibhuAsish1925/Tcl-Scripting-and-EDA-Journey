@@ -7,3 +7,11 @@ set version 9.0
 puts "Name    : $name"
 puts "Role    : $role"
 puts "Tcl     : $version"
+
+
+
+
+# Output:
+# Name    : Bibhu
+# Role    : Tcl Learner
+# Tcl     : 9.0
