@@ -2,46 +2,31 @@
 
 A hands-on journey from **Tcl fundamentals to practical EDA/HDL automation**. The repository focuses on learning Tcl by building small scripts first and gradually applying the language to real VLSI/EDA-style workflows.
 
-## 🚀 Learning Path
+## Learning Path
 
 ```text
-01 Core Syntax
-      ↓
-02 Data Handling
-      ↓
-03 Procedures
-      ↓
-04 String Processing
-      ↓
-05 File Automation
-      ↓
-06 Pattern Matching
-      ↓
-07 Error Handling
-      ↓
-08 Automation Utilities
-      ↓
-09 EDA Workflows
-      ↓
-10 Practical HDL Automation
+01 Core Syntax (Tcl fundamentals)
+              ↓
+02 Data Handling (Lists, arrays, dictionaries)
+              ↓
+03 Procedures (Reusable procedures and scope)
+              ↓
+04 String Processing (Strings, formatting, parsing)
+              ↓
+05 File Automation (File and directory automation)
+              ↓
+06 Pattern Matching (Glob, regex, log parsing)
+              ↓
+07 Error Handling (Errors and validation)
+              ↓
+08 Automation Utilities (Commands, environment, arguments)
+              ↓
+09 EDA Workflows (EDA reports and log analysis)
+              ↓
+10 Practical HDL Automation (Tcl + Verilog simulation automation)
 ```
 
-## 📂 Repository Structure
-
-```text
-01_core_syntax/              Tcl fundamentals
-02_data_handling/            Lists, arrays, dictionaries
-03_procedures/               Reusable procedures and scope
-04_string_processing/        Strings, formatting, parsing
-05_file_automation/          File and directory automation
-06_pattern_matching/         Glob, regex, log parsing
-07_error_handling/           Errors and validation
-08_automation_utilities/     Commands, environment, arguments
-09_eda_workflows/            EDA reports and log analysis
-10_practical_hdl_automation/ Tcl + Verilog simulation automation
-```
-
-## 🧠 What I Learned
+## What I Learned
 
 - Tcl command structure, variables and substitutions
 - Expressions, conditions and loops
@@ -60,7 +45,7 @@ A hands-on journey from **Tcl fundamentals to practical EDA/HDL automation**. Th
 - Integration with **Icarus Verilog** and **GTKWave**
 - Building repeatable EDA automation flows
 
-## 🔧 Practical EDA Flow
+## Practical EDA Flow
 
 The final stages apply Tcl to real Verilog designs:
 
@@ -88,7 +73,7 @@ Current HDL examples include:
 - 4-bit ALU
 - UART TX/RX
 
-## 🎯 Core Automation Pattern
+## Core Automation Pattern
 
 ```text
 INPUT
@@ -106,7 +91,7 @@ REPORT
 
 This repository was built to move from **learning Tcl syntax** to understanding how Tcl can automate repetitive tasks in practical **VLSI/EDA workflows**.
 
-## 🛠️ Tools
+## Tools
 
 - Tcl
 - Ubuntu / WSL
@@ -120,6 +105,8 @@ This repository was built to move from **learning Tcl syntax** to understanding 
 **Completed — Tcl fundamentals → EDA scripting → practical HDL automation.**
 
 Future extensions can include self-checking testbenches, automated PASS/FAIL verification, larger RTL flows, synthesis automation and tool-specific EDA scripting.
+
+---
 
 ## Author
 
