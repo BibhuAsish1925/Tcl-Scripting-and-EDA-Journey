@@ -3,11 +3,17 @@
 set tools {Tcl Verilog Python Git}
 
 puts "Tools: $tools"
+
+# llength returns the number of elements in a list.
 puts "Number of tools: [llength $tools]"
 
+# lindex accesses a list element using its index; Tcl indexes start from 0.
 puts "First tool: [lindex $tools 0]"
+
+# "end" refers to the last element of the list.
 puts "Last tool: [lindex $tools end]"
 
+# lappend adds a new element to an existing list.
 lappend tools Linux
 
 puts "After adding Linux:"

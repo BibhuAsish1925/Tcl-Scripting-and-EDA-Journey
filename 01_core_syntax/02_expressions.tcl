@@ -3,6 +3,7 @@
 set a 20
 set b 6
 
+# expr evaluates the arithmetic expression; [ ] performs command substitution.
 set sum [expr {$a + $b}]
 set difference [expr {$a - $b}]
 set product [expr {$a * $b}]

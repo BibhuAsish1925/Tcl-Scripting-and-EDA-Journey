@@ -1,0 +1,533 @@
+============================================================
+PHASE 01 — CORE TCL SYNTAX
+============================================================
+
+Purpose:
+Learn the fundamental Tcl syntax required to write basic
+scripts and understand how Tcl evaluates commands,
+variables, expressions, conditions, loops, and lists.
+
+============================================================
+1. TCL COMMAND STRUCTURE
+============================================================
+
+Basic Tcl command:
+
+command argument1 argument2 ...
+
+Example:
+
+puts "Hello, Tcl!"
+
+"puts" is the command.
+"Hello, Tcl!" is the argument.
+
+Most Tcl commands end at a newline.
+
+Example:
+
+puts "Hello"
+puts "World"
+
+Output:
+
+Hello
+World
+
+
+============================================================
+2. VARIABLES
+============================================================
+
+Tcl variables are created using the "set" command.
+
+Syntax:
+
+set variable_name value
+
+Example:
+
+set name "Bibhu"
+set age 22
+
+To access a variable, use "$":
+
+puts $name
+puts $age
+
+Example:
+
+set name "Bibhu"
+puts "Name: $name"
+
+Output:
+
+Name: Bibhu
+
+
+Important:
+Tcl does not require a separate variable declaration such as
+int, float, or string.
+
+
+============================================================
+3. BASIC OUTPUT — puts
+============================================================
+
+The "puts" command prints information to the terminal.
+
+Example:
+
+puts "Hello, Tcl!"
+
+Variables can be included inside double-quoted strings:
+
+set tool "Tcl"
+puts "Learning $tool"
+
+Output:
+
+Learning Tcl
+
+
+============================================================
+4. EXPRESSIONS AND expr
+============================================================
+
+Arithmetic and logical expressions are evaluated using
+the "expr" command.
+
+Example:
+
+set a 20
+set b 6
+
+set sum [expr {$a + $b}]
+
+The square brackets "[ ]" perform command substitution.
+
+The command inside "[ ]" is executed and its result is
+returned.
+
+Example:
+
+puts [expr {10 + 5}]
+
+Output:
+
+15
+
+
+Basic arithmetic operators:
+
++    Addition
+-    Subtraction
+*    Multiplication
+/    Division
+%    Remainder
+
+
+Example:
+
+set a 20
+set b 6
+
+puts [expr {$a + $b}]
+puts [expr {$a - $b}]
+puts [expr {$a * $b}]
+puts [expr {$a / $b}]
+puts [expr {$a % $b}]
+
+
+Important:
+When both operands are integers, division produces an
+integer result.
+
+Example:
+
+expr {20 / 6}
+
+Result:
+
+3
+
+
+============================================================
+5. CONDITIONS
+============================================================
+
+Tcl uses "if", "elseif", and "else" for decision making.
+
+Basic structure:
+
+if {condition} {
+    commands
+} elseif {condition} {
+    commands
+} else {
+    commands
+}
+
+
+Example:
+
+set temperature 28
+
+if {$temperature >= 30} {
+    puts "Hot"
+} elseif {$temperature >= 20} {
+    puts "Moderate"
+} else {
+    puts "Cold"
+}
+
+
+Common comparison operators:
+
+==    Equal
+!=    Not equal
+>     Greater than
+<     Less than
+>=    Greater than or equal
+<=    Less than or equal
+
+
+Conditions are normally placed inside curly braces:
+
+if {$a > $b} {
+    puts "A is greater"
+}
+
+
+============================================================
+6. FOR LOOP
+============================================================
+
+A "for" loop repeats a block of commands.
+
+Structure:
+
+for {initialization} {condition} {update} {
+    commands
+}
+
+
+Example:
+
+for {set i 1} {$i <= 5} {incr i} {
+    puts "Count: $i"
+}
+
+
+Execution:
+
+i = 1
+Check condition
+Execute commands
+Increment i
+Check condition again
+Continue until condition becomes false.
+
+
+============================================================
+7. incr COMMAND
+============================================================
+
+"incr" is commonly used for incrementing integer variables.
+
+Example:
+
+set i 1
+incr i
+
+Now:
+
+i = 2
+
+
+It can also increment by a specified amount:
+
+incr i 5
+
+This increases i by 5.
+
+
+============================================================
+8. WHILE LOOP
+============================================================
+
+A "while" loop continues executing while a condition is true.
+
+Structure:
+
+while {condition} {
+    commands
+}
+
+
+Example:
+
+set i 1
+
+while {$i <= 5} {
+    puts "Count: $i"
+    incr i
+}
+
+
+Important:
+Make sure the condition eventually becomes false,
+otherwise the loop can become infinite.
+
+
+============================================================
+9. LISTS
+============================================================
+
+A Tcl list is an ordered collection of elements.
+
+Example:
+
+set tools {Tcl Verilog Python Git}
+
+
+Access the complete list:
+
+puts $tools
+
+
+Number of elements:
+
+llength $tools
+
+
+Example:
+
+llength $tools
+
+Result:
+
+4
+
+
+============================================================
+10. lindex
+============================================================
+
+"lindex" retrieves an element from a list.
+
+Syntax:
+
+lindex list index
+
+
+Example:
+
+set tools {Tcl Verilog Python Git}
+
+puts [lindex $tools 0]
+
+Output:
+
+Tcl
+
+
+Tcl list indexes start from 0.
+
+Index:
+
+0 -> Tcl
+1 -> Verilog
+2 -> Python
+3 -> Git
+
+
+The keyword "end" can be used to access the last element:
+
+lindex $tools end
+
+
+============================================================
+11. lappend
+============================================================
+
+"lappend" adds an element to a list.
+
+Example:
+
+set tools {Tcl Verilog Python Git}
+
+lappend tools Linux
+
+puts $tools
+
+Output:
+
+Tcl Verilog Python Git Linux
+
+
+============================================================
+12. TCL SUBSTITUTION
+============================================================
+
+Tcl commonly uses three important forms of syntax:
+
+$variable
+[command]
+{script/block}
+
+
+Variable substitution:
+
+puts $name
+
+
+Command substitution:
+
+puts [expr {10 + 5}]
+
+
+Braces:
+
+if {$a > $b} {
+    puts "A is greater"
+}
+
+
+============================================================
+13. DOUBLE QUOTES VS CURLY BRACES
+============================================================
+
+Double quotes allow substitutions.
+
+Example:
+
+set name "Bibhu"
+puts "Hello $name"
+
+Output:
+
+Hello Bibhu
+
+
+Curly braces generally prevent substitutions while Tcl is
+parsing the contents.
+
+Example:
+
+puts {$name}
+
+Output:
+
+$name
+
+
+Curly braces are commonly used around expressions and
+control-flow conditions:
+
+if {$value > 10} {
+    puts "Greater than 10"
+}
+
+
+============================================================
+14. IMPORTANT TCL COMMANDS LEARNED
+============================================================
+
+puts
+    Display output.
+
+set
+    Create or modify a variable.
+
+expr
+    Evaluate an expression.
+
+if
+    Conditional execution.
+
+elseif
+    Additional condition.
+
+else
+    Executes when previous conditions are false.
+
+for
+    Repeated execution with initialization, condition,
+    and update.
+
+while
+    Repeated execution while a condition remains true.
+
+incr
+    Increment an integer variable.
+
+llength
+    Return the number of elements in a list.
+
+lindex
+    Access an element from a list.
+
+lappend
+    Add an element to a list.
+
+
+============================================================
+15. KEY TCL CONCEPTS TO REMEMBER
+============================================================
+
+1. Tcl is command-oriented.
+
+2. Variables are created with "set".
+
+3. Variables are accessed using "$".
+
+4. Commands can be nested using "[ ]".
+
+5. Expressions are evaluated using "expr".
+
+6. Conditions are commonly enclosed in "{ }".
+
+7. Tcl list indexes start at 0.
+
+8. "incr" is useful for loop counters.
+
+9. "for" and "while" are used for repetition.
+
+10. Tcl does not require explicit variable type declarations.
+
+11. Double quotes allow substitutions.
+
+12. Curly braces generally prevent substitutions during
+    parsing and are commonly used for expressions and
+    script blocks.
+
+
+============================================================
+PHASE 01 COMPLETE
+============================================================
+
+Exercises completed:
+
+01_variables_and_output.tcl
+02_expressions.tcl
+03_conditions.tcl
+04_loops.tcl
+05_lists.tcl
+
+Core topics:
+
+Variables
+Output
+Expressions
+Arithmetic
+Conditions
+Loops
+Lists
+Substitution
+Basic Tcl command structure
+
+Next phase:
+
+PHASE 02 — DATA HANDLING
+============================================================
