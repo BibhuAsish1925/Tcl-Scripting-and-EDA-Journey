@@ -1,0 +1,176 @@
+$date
+	Sun Sep 27 11:47:45 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module UART_tb $end
+$var wire 1 ! tx $end
+$var wire 8 " rx_data [7:0] $end
+$var wire 1 # done $end
+$var reg 1 $ clk $end
+$var reg 8 % data [7:0] $end
+$var reg 1 & reset $end
+$var reg 1 ' start $end
+$scope module RX $end
+$var wire 1 $ clk $end
+$var wire 1 & reset $end
+$var wire 1 ! rx $end
+$var reg 4 ( count [3:0] $end
+$var reg 8 ) data_out [7:0] $end
+$var reg 1 # done $end
+$var reg 1 * receiving $end
+$upscope $end
+$scope module TX $end
+$var wire 1 $ clk $end
+$var wire 8 + data [7:0] $end
+$var wire 1 & reset $end
+$var wire 1 ' start $end
+$var reg 4 , count [3:0] $end
+$var reg 1 - sending $end
+$var reg 1 ! tx $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+0-
+b0 ,
+b0 +
+0*
+bx )
+b0 (
+0'
+1&
+b0 %
+0$
+0#
+bx "
+1!
+$end
+#5000
+1$
+#10000
+0$
+0&
+#15000
+1$
+#20000
+0$
+1'
+b10100101 %
+b10100101 +
+#25000
+1-
+1$
+#30000
+0$
+0'
+#35000
+b1 ,
+0!
+1$
+#40000
+0$
+#45000
+1*
+b10 ,
+1!
+1$
+#50000
+0$
+#55000
+b11 ,
+0!
+b1 (
+1$
+#60000
+0$
+#65000
+bx0 "
+bx0 )
+b10 (
+b100 ,
+1!
+1$
+#70000
+0$
+#75000
+b101 ,
+0!
+bx10 "
+bx10 )
+b11 (
+1$
+#80000
+0$
+#85000
+bx010 "
+bx010 )
+b100 (
+b110 ,
+1$
+#90000
+0$
+#95000
+b111 ,
+1!
+bx0010 "
+bx0010 )
+b101 (
+1$
+#100000
+0$
+#105000
+bx10010 "
+bx10010 )
+b110 (
+b1000 ,
+0!
+1$
+#110000
+0$
+#115000
+b1001 ,
+1!
+bx010010 "
+bx010010 )
+b111 (
+1$
+#120000
+0$
+#125000
+bx1010010 "
+bx1010010 )
+b1000 (
+0-
+b1010 ,
+1$
+#130000
+0$
+#135000
+b11010010 "
+b11010010 )
+b1001 (
+1$
+#140000
+0$
+#145000
+0*
+1#
+b1010 (
+1$
+#150000
+0$
+#155000
+1$
+#160000
+0$
+#165000
+1$

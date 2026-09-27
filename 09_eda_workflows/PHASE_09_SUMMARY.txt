@@ -1,0 +1,629 @@
+PHASE 09 — EDA WORKFLOWS
+========================
+
+Purpose
+-------
+Phase 09 combines the Tcl concepts learned in Phases 01–08 and applies
+them to practical EDA-style automation tasks.
+
+The main goal is to learn how Tcl can automate common tasks such as:
+
+- Scanning project files
+- Analyzing log files
+- Parsing timing reports
+- Calculating cell statistics
+- Generating automated summary reports
+- Building complete command-line automation flows
+
+
+1. FILE REPORTING
+-----------------
+
+Important commands:
+
+glob
+file exists
+file tail
+llength
+foreach
+
+Example:
+
+set files [glob -nocomplain -directory $directory *.tcl]
+
+foreach file $files {
+    puts [file tail $file]
+}
+
+Important concepts:
+
+- glob finds files matching a pattern.
+- -nocomplain prevents an error when no files match.
+- file tail returns the final part of a path.
+- llength returns the number of list elements.
+- foreach processes each file individually.
+
+EDA applications:
+
+- Finding RTL files
+- Finding constraint files
+- Scanning project directories
+- Generating file inventories
+- Checking whether expected files exist
+
+
+2. LOG FILE ANALYSIS
+--------------------
+
+Important commands:
+
+open
+gets
+close
+regexp
+incr
+
+Example:
+
+set file [open $filename r]
+
+while {[gets $file line] >= 0} {
+
+    if {[regexp {ERROR:} $line]} {
+        incr error_count
+    }
+}
+
+close $file
+
+Important concepts:
+
+- gets reads a file one line at a time.
+- regexp searches for patterns.
+- incr increases a numeric variable.
+- Processing line-by-line is useful for large log files.
+
+Typical log categories:
+
+PASS
+FAIL
+WARNING
+ERROR
+INFO
+
+EDA applications:
+
+- Simulation log analysis
+- Synthesis log analysis
+- Place-and-route log analysis
+- Checking warnings and errors
+- Automatically determining flow status
+
+
+3. REGULAR EXPRESSIONS FOR REPORT PARSING
+------------------------------------------
+
+Regular expressions allow Tcl to extract structured information
+from text.
+
+Example:
+
+regexp {WNS:\s+(-?[0-9.]+)} $line -> value
+
+Important concepts:
+
+\s
+    Matches whitespace.
+
+[0-9.]
+    Matches digits and decimal points.
+
+-?
+    Allows an optional negative sign.
+
+()
+    Creates a capture group.
+
+Example input:
+
+WNS: -0.25
+
+Extracted value:
+
+-0.25
+
+EDA applications:
+
+- Timing reports
+- Area reports
+- Power reports
+- Utilization reports
+- Tool logs
+- Verification reports
+
+
+4. TIMING REPORT ANALYSIS
+-------------------------
+
+Typical timing information:
+
+WNS
+TNS
+VIOLATIONS
+
+WNS
+---
+Worst Negative Slack.
+
+A negative WNS generally indicates a timing violation.
+
+TNS
+---
+Total Negative Slack.
+
+VIOLATIONS
+----------
+Number of reported timing violations.
+
+Example:
+
+WNS: -0.25
+TNS: -10.40
+VIOLATIONS: 3
+
+Tcl can extract these values and automatically determine a status.
+
+Example:
+
+if {$wns < 0 || $violations > 0} {
+    set timing_status "FAIL"
+} else {
+    set timing_status "PASS"
+}
+
+Important concept:
+
+Report
+   ↓
+Extract values
+   ↓
+Check limits
+   ↓
+Determine status
+
+
+5. CELL STATISTICS
+------------------
+
+Cell reports can contain structured information such as:
+
+INV_X1 120
+NAND2_X1 80
+NOR2_X1 60
+DFF_X1 40
+
+Tcl can split each line into fields.
+
+Example:
+
+set fields [split $line]
+
+set cell_type [lindex $fields 0]
+set count [lindex $fields 1]
+
+Important commands:
+
+split
+lindex
+incr
+
+Example:
+
+incr total_cells $count
+
+This allows Tcl to calculate:
+
+- Number of cell types
+- Total cell count
+- Individual cell usage
+- Statistics from synthesis reports
+
+EDA applications:
+
+- Standard-cell statistics
+- Gate-count analysis
+- Design-size estimation
+- Comparing synthesis results
+
+
+6. COMMAND-LINE ARGUMENTS
+-------------------------
+
+Important variables:
+
+argc
+argv
+
+argc
+    Number of command-line arguments.
+
+argv
+    List containing the arguments.
+
+Example:
+
+if {$argc != 1} {
+    puts "Usage: tclsh script.tcl <design>"
+    exit 1
+}
+
+set design [lindex $argv 0]
+
+Run:
+
+tclsh script.tcl UART
+
+Here:
+
+argc = 1
+
+argv = UART
+
+This makes Tcl scripts reusable for different designs.
+
+Example:
+
+tclsh script.tcl UART
+tclsh script.tcl SPI
+tclsh script.tcl CPU
+
+
+7. ERROR HANDLING IN EDA AUTOMATION
+-----------------------------------
+
+Important command:
+
+catch
+
+Example:
+
+set status [catch {open $filename r} file]
+
+if {$status != 0} {
+    puts "Error opening timing report: $file"
+    exit 1
+}
+
+Important concepts:
+
+- catch prevents an error from terminating the script unexpectedly.
+- Return code 0 means the command succeeded.
+- A non-zero return code indicates an error.
+- Error information can be stored in another variable.
+
+EDA applications:
+
+- Missing reports
+- Missing input files
+- Invalid tool output
+- Failed commands
+- Unexpected flow conditions
+
+
+8. AUTOMATIC REPORT GENERATION
+------------------------------
+
+Tcl can read analysis results and generate a new report.
+
+Example:
+
+set report [open $report_file w]
+
+puts $report "EDA Automation Summary"
+puts $report "----------------------"
+puts $report "Design: $design"
+puts $report "WNS: $wns"
+puts $report "Violations: $violations"
+puts $report "Timing Status: $timing_status"
+
+close $report
+
+This creates a reusable summary report.
+
+EDA applications:
+
+- Regression summaries
+- Build reports
+- Timing summaries
+- Simulation summaries
+- Synthesis summaries
+- Automated verification reports
+
+
+9. COMPLETE EDA AUTOMATION FLOW
+--------------------------------
+
+The final exercise combines multiple Tcl concepts.
+
+Typical flow:
+
+Command-line argument
+        |
+        v
+Input validation
+        |
+        v
+Open report
+        |
+        v
+Read report
+        |
+        v
+Regular-expression parsing
+        |
+        v
+Extract metrics
+        |
+        v
+Check conditions
+        |
+        v
+Generate summary
+        |
+        v
+Close files
+
+
+Example concepts used together:
+
+argc / argv
+if
+exit
+catch
+open
+gets
+close
+regexp
+variables
+numeric comparison
+puts
+
+
+10. IMPORTANT COMMANDS FROM PHASE 09
+-------------------------------------
+
+glob
+file
+llength
+foreach
+
+open
+gets
+close
+
+regexp
+split
+lindex
+incr
+
+catch
+exit
+
+argc
+argv
+
+puts
+
+
+11. IMPORTANT CONCEPTS
+----------------------
+
+File discovery
+--------------
+Finding files automatically using glob.
+
+File parsing
+------------
+Reading files line by line using gets.
+
+Pattern matching
+----------------
+Using regexp to identify and extract information.
+
+Data extraction
+---------------
+Capturing values from structured text.
+
+Validation
+----------
+Checking values against expected conditions.
+
+Error handling
+--------------
+Using catch to safely handle failures.
+
+Command-line automation
+-----------------------
+Using argc and argv to make scripts reusable.
+
+Report generation
+-----------------
+Writing processed results into a new report.
+
+Flow automation
+---------------
+Combining multiple operations into one automated process.
+
+
+12. EDA AUTOMATION PATTERN
+--------------------------
+
+A common Tcl automation pattern is:
+
+INPUT
+  |
+  v
+READ
+  |
+  v
+PARSE
+  |
+  v
+ANALYZE
+  |
+  v
+VALIDATE
+  |
+  v
+REPORT
+
+For example:
+
+Timing report
+     |
+     v
+Read WNS/TNS
+     |
+     v
+Check violations
+     |
+     v
+Determine PASS/FAIL
+     |
+     v
+Generate summary
+
+
+13. PHASE 09 EXERCISES
+----------------------
+
+34_file_reporter.tcl
+    Scans a directory and reports Tcl files.
+
+35_log_analyzer.tcl
+    Reads a log and counts PASS, FAIL, WARNING and ERROR messages.
+
+36_timing_report_parser.tcl
+    Extracts WNS, TNS and violation information.
+
+37_cell_statistics.tcl
+    Calculates cell statistics from a structured report.
+
+38_eda_automation_flow.tcl
+    Combines command-line arguments, file handling, regexp,
+    error handling, validation and report generation.
+
+
+14. PRACTICAL EDA USE CASES
+---------------------------
+
+Tcl scripting is commonly useful for automation tasks such as:
+
+- Running design tools
+- Processing tool reports
+- Parsing simulation logs
+- Checking timing results
+- Extracting synthesis statistics
+- Generating reports
+- Running repetitive design-flow tasks
+- Automating regression flows
+- Checking design files
+- Creating flow summaries
+
+
+15. COMPLETE TCL LEARNING JOURNEY
+---------------------------------
+
+Phase 01 — Core Syntax
+    Variables
+    Expressions
+    Conditions
+    Loops
+    Lists
+
+Phase 02 — Data Handling
+    Lists
+    Arrays
+    Dictionaries
+    Nested data
+
+Phase 03 — Procedures
+    Procedures
+    Arguments
+    Return values
+    Scope
+
+Phase 04 — String Processing
+    String operations
+    Formatting
+    Parsing
+    Text processing
+
+Phase 05 — File Automation
+    Creating files
+    Reading files
+    Writing files
+    Directories
+    File reports
+
+Phase 06 — Pattern Matching
+    Glob
+    Regular expressions
+    Log parsing
+    Data extraction
+
+Phase 07 — Error Handling
+    catch
+    Error handling
+    Validation
+
+Phase 08 — Automation Utilities
+    Command execution
+    Environment variables
+    Command-line arguments
+    Automation scripts
+
+Phase 09 — EDA Workflows
+    File reporting
+    Log analysis
+    Timing parsing
+    Cell statistics
+    Complete EDA automation
+
+
+16. FINAL PHASE 09 TAKEAWAY
+---------------------------
+
+The most important skill from Phase 09 is not memorizing individual
+commands.
+
+The important skill is learning how to combine Tcl commands to create
+automation workflows.
+
+Instead of manually:
+
+- Searching files
+- Opening reports
+- Looking for errors
+- Checking timing values
+- Counting cells
+- Creating summaries
+
+Tcl can perform these tasks automatically.
+
+The overall idea is:
+
+Manual EDA task
+      ↓
+Identify repetitive steps
+      ↓
+Write Tcl script
+      ↓
+Parse tool output
+      ↓
+Apply checks
+      ↓
+Generate result
+
+
+END OF PHASE 09
