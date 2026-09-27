@@ -1,0 +1,14 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Tcl generated files
+*.log
+*.tmp
+*.bak
+
+# Generated outputs
+outputs/
