@@ -1,0 +1,345 @@
+PHASE 04 — STRING PROCESSING
+============================
+
+Purpose
+-------
+String processing is important in Tcl because automation scripts
+frequently work with filenames, logs, tool output, configuration
+files, reports, and other text-based data.
+
+This phase covers basic string operations, formatting, parsing,
+and text manipulation.
+
+
+1. String Length
+----------------
+
+Syntax:
+
+string length $text
+
+Returns the number of characters in a string.
+
+Example:
+
+set text "Tcl Automation"
+
+puts [string length $text]
+
+
+2. Converting Case
+------------------
+
+Convert text to uppercase:
+
+string toupper $text
+
+Convert text to lowercase:
+
+string tolower $text
+
+Example:
+
+set text "Tcl Automation"
+
+puts [string toupper $text]
+puts [string tolower $text]
+
+
+3. Accessing Characters
+-----------------------
+
+The "string index" command accesses a single character.
+
+Syntax:
+
+string index $text index
+
+Example:
+
+set text "Tcl Automation"
+
+puts [string index $text 0]
+
+Tcl string indexes start from 0.
+
+
+4. Extracting a String Range
+----------------------------
+
+The "string range" command extracts characters between two indexes.
+
+Syntax:
+
+string range $text first last
+
+Example:
+
+set text "Tcl Automation"
+
+puts [string range $text 0 2]
+
+The "end" keyword can also be used to refer to the last character.
+
+
+5. String Formatting
+--------------------
+
+The "format" command creates a formatted string.
+
+Syntax:
+
+format "format_string" values
+
+Example:
+
+set name "Bibhu"
+set version 1
+
+set message [format "Name: %s | Version: %d" $name $version]
+
+Common format specifiers:
+
+%s
+    String
+
+%d
+    Integer
+
+%f
+    Floating-point value
+
+
+6. Splitting Strings
+--------------------
+
+The "split" command divides a string into a Tcl list using a
+specified delimiter.
+
+Syntax:
+
+split $text delimiter
+
+Example:
+
+set data "UART,115200,PASS"
+
+set fields [split $data ","]
+
+The resulting list contains:
+
+UART
+115200
+PASS
+
+The individual values can then be accessed using list commands
+such as lindex.
+
+
+7. Finding Text
+---------------
+
+The "string first" command finds the position of a substring.
+
+Syntax:
+
+string first substring string
+
+Example:
+
+set text "ERROR: UART communication failed"
+
+set position [string first "UART" $text]
+
+If the substring is found, its starting index is returned.
+
+If it is not found, the command returns -1.
+
+
+8. Pattern Matching
+-------------------
+
+The "string match" command checks whether a string matches a
+pattern.
+
+Syntax:
+
+string match pattern string
+
+Example:
+
+if {[string match "ERROR:*" $text]} {
+    puts "Error detected"
+}
+
+The "*" wildcard matches any sequence of characters.
+
+
+9. Replacing Text
+-----------------
+
+The "string map" command replaces specified text.
+
+Syntax:
+
+string map {old new} $text
+
+Example:
+
+set text "ERROR: UART communication failed"
+
+set updated [string map {"ERROR:" "WARNING:"} $text]
+
+This creates a new string with the specified text replaced.
+
+
+10. Strings and Lists
+---------------------
+
+String processing often works together with Tcl lists.
+
+Example:
+
+set data "UART,115200,PASS"
+
+set fields [split $data ","]
+
+puts [lindex $fields 0]
+puts [lindex $fields 1]
+puts [lindex $fields 2]
+
+Here:
+
+split
+    Converts the string into a list.
+
+lindex
+    Retrieves individual values from the resulting list.
+
+This combination is useful for processing structured text.
+
+
+11. Important Commands
+----------------------
+
+string length
+    Returns the number of characters.
+
+string toupper
+    Converts a string to uppercase.
+
+string tolower
+    Converts a string to lowercase.
+
+string index
+    Retrieves a character.
+
+string range
+    Extracts part of a string.
+
+format
+    Creates formatted strings.
+
+split
+    Converts a delimited string into a list.
+
+string first
+    Finds the position of text.
+
+string match
+    Performs wildcard pattern matching.
+
+string map
+    Replaces specified text.
+
+
+12. Practical Automation Uses
+-----------------------------
+
+String processing is commonly used for:
+
+- Parsing log messages
+- Processing tool output
+- Extracting values from reports
+- Processing filenames
+- Checking error messages
+- Formatting reports
+- Extracting module names
+- Processing configuration data
+- Preparing data for further automation
+
+
+13. Example Automation Flow
+---------------------------
+
+A typical text-processing flow can be:
+
+Raw text
+   |
+   v
+split / string operations
+   |
+   v
+Extract required information
+   |
+   v
+Check or process the information
+   |
+   v
+Generate formatted output
+
+For example, an automation script could read:
+
+"UART,115200,PASS"
+
+and extract:
+
+Protocol  -> UART
+Baud Rate -> 115200
+Status    -> PASS
+
+
+14. Key Concepts Learned
+------------------------
+
+- Measuring string length
+- Converting string case
+- Accessing characters
+- Extracting string ranges
+- Formatting text
+- Splitting strings
+- Searching for text
+- Matching patterns
+- Replacing text
+- Combining strings with lists
+- Processing structured text
+
+
+15. Phase 04 Exercises
+----------------------
+
+14_string_operations.tcl
+    Basic string operations.
+
+15_formatting.tcl
+    Formatting strings using format.
+
+16_string_parsing.tcl
+    Splitting and extracting data from strings.
+
+17_text_processing.tcl
+    Searching, matching, and replacing text.
+
+
+Phase Completion
+----------------
+
+Phase 04 introduced the string-processing capabilities required
+for handling text-based automation data.
+
+These concepts will become especially useful in later phases for
+log parsing, report analysis, and EDA automation.
+
+Next phase:
+
+Phase 05 — File Automation

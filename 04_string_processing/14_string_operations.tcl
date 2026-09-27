@@ -23,7 +23,7 @@ puts "First three characters: [string range $text 0 2]"
 
 
 # Output:
-# Length: 15
+# Length: 14
 # Uppercase: TCL AUTOMATION
 # Lowercase: tcl automation
 # First character: T
