@@ -1,8 +1,6 @@
 # Tcl Scripting Journey
 
-A hands-on journey from **Tcl fundamentals to practical EDA/HDL automation**.
-
-The repository focuses on learning Tcl by building small scripts first and gradually applying the language to real VLSI/EDA-style workflows.
+A hands-on journey from **Tcl fundamentals to practical EDA/HDL automation**. The repository focuses on learning Tcl by building small scripts first and gradually applying the language to real VLSI/EDA-style workflows.
 
 ## 🚀 Learning Path
 
@@ -122,3 +120,11 @@ This repository was built to move from **learning Tcl syntax** to understanding 
 **Completed — Tcl fundamentals → EDA scripting → practical HDL automation.**
 
 Future extensions can include self-checking testbenches, automated PASS/FAIL verification, larger RTL flows, synthesis automation and tool-specific EDA scripting.
+
+## Author
+
+**Bibhu Asish Panda**  
+Electronics / VLSI / Digital Design Enthusiast
+
+[GitHub](https://github.com/BibhuAsish1925) ·
+[LinkedIn](www.linkedin.com/in/bibhu-asish-panda-05332b288)
