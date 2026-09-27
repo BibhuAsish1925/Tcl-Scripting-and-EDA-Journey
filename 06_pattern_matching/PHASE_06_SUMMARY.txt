@@ -1,0 +1,352 @@
+PHASE 06 — PATTERN MATCHING
+===========================
+
+Purpose
+-------
+Pattern matching allows Tcl scripts to find files, identify text
+patterns, search logs, and extract structured information.
+
+This is an important part of automation because tool output,
+reports, and log files often contain large amounts of text.
+
+
+1. Glob Matching
+----------------
+
+The "glob" command finds files and directories that match a pattern.
+
+Syntax:
+
+glob pattern
+
+Example:
+
+set files [glob -nocomplain "*.tcl"]
+
+This searches for Tcl files matching:
+
+*.tcl
+
+The "*" wildcard represents any sequence of characters.
+
+Common patterns:
+
+*.tcl
+    All Tcl files.
+
+*.log
+    All log files.
+
+report_*.txt
+    Text files beginning with "report_".
+
+
+2. The -nocomplain Option
+-------------------------
+
+Normally, glob can generate an error when no files match.
+
+Using:
+
+glob -nocomplain "*.log"
+
+prevents the error and returns an empty result when no matching
+files are found.
+
+This is useful in automation scripts where a matching file may
+or may not exist.
+
+
+3. Regular Expressions
+----------------------
+
+Regular expressions provide more powerful pattern matching than
+simple glob patterns.
+
+The "regexp" command checks whether a pattern matches a string.
+
+Syntax:
+
+regexp {pattern} $text
+
+Example:
+
+set text "UART PASS"
+
+if {[regexp {UART} $text]} {
+    puts "UART found"
+}
+
+If the pattern is found, regexp returns 1.
+
+If it is not found, regexp returns 0.
+
+
+4. Basic Regular Expression Patterns
+-------------------------------------
+
+Some commonly used regular-expression symbols:
+
+[A-Z]
+    Any uppercase letter.
+
+[a-z]
+    Any lowercase letter.
+
+[0-9]
+    Any digit.
+
++
+    One or more occurrences.
+
+*
+    Zero or more occurrences.
+
+.
+    Any single character.
+
+^
+    Beginning of a string.
+
+$
+    End of a string.
+
+Example:
+
+[A-Z]+
+
+matches one or more uppercase letters.
+
+
+5. Capturing Data with regexp
+-----------------------------
+
+Regular expressions can extract information using parentheses.
+
+Example:
+
+set text "UART PASS"
+
+regexp {([A-Z]+) ([A-Z]+)} $text -> protocol status
+
+The captured values are stored in:
+
+protocol
+status
+
+Result:
+
+protocol = UART
+status   = PASS
+
+The "->" variable is used when the complete matched string is
+not required.
+
+
+6. Reading Logs Line by Line
+----------------------------
+
+The "gets" command reads one line from an opened file.
+
+Example:
+
+while {[gets $file line] >= 0} {
+    puts $line
+}
+
+This allows a script to process a large file one line at a time
+instead of reading the entire file into memory.
+
+
+7. Log Parsing
+--------------
+
+Pattern matching can be combined with file processing.
+
+Example:
+
+while {[gets $file line] >= 0} {
+
+    if {[regexp {ERROR:} $line]} {
+        puts "Error found: $line"
+    }
+}
+
+This searches every line for the pattern:
+
+ERROR:
+
+and reports matching lines.
+
+
+8. Extracting Structured Data
+-----------------------------
+
+Regular expressions can extract values from structured text.
+
+Example:
+
+set log "Module=UART Status=PASS"
+
+regexp {Module=([A-Za-z0-9_]+)} $log -> module
+regexp {Status=([A-Za-z0-9_]+)} $log -> status
+
+The extracted values are:
+
+module = UART
+status = PASS
+
+This technique is useful for processing reports and tool output.
+
+
+9. Glob vs Regular Expression
+-----------------------------
+
+Glob:
+
+Used mainly for matching filenames and directory names.
+
+Example:
+
+*.tcl
+
+Regular expression:
+
+Used for detailed text matching and data extraction.
+
+Example:
+
+{Module=([A-Za-z0-9_]+)}
+
+They solve different types of problems.
+
+
+10. Important Commands
+----------------------
+
+glob
+    Finds files or directories matching a pattern.
+
+regexp
+    Performs regular-expression matching and extraction.
+
+gets
+    Reads one line from a file.
+
+open
+    Opens a file for reading or writing.
+
+close
+    Closes an opened file.
+
+while
+    Repeatedly processes data while a condition is true.
+
+
+11. Pattern Matching Workflow
+-----------------------------
+
+A common automation workflow is:
+
+Find files
+    |
+    v
+Open file
+    |
+    v
+Read line by line
+    |
+    v
+Search for patterns
+    |
+    v
+Extract required information
+    |
+    v
+Generate useful output
+
+
+12. Practical Automation Uses
+-----------------------------
+
+Pattern matching can be used for:
+
+- Finding source files
+- Finding log files
+- Searching error messages
+- Parsing synthesis logs
+- Extracting timing information
+- Extracting module names
+- Detecting PASS/FAIL results
+- Processing tool-generated reports
+- Building log analyzers
+- Collecting information from multiple files
+
+
+13. EDA Automation Applications
+-------------------------------
+
+In EDA workflows, pattern matching can help identify information
+such as:
+
+Module=UART
+Status=PASS
+
+or:
+
+WNS = -0.25
+TNS = -10.4
+
+or:
+
+ERROR: Cannot find cell
+
+A Tcl script can search for these patterns and extract the
+important values automatically.
+
+
+14. Key Concepts Learned
+------------------------
+
+- File pattern matching with glob
+- Wildcards
+- The -nocomplain option
+- Regular expressions
+- Character classes
+- Quantifiers
+- Capturing values with regexp
+- Reading files line by line
+- Searching log files
+- Extracting structured data
+- Combining file handling with pattern matching
+
+
+15. Phase 06 Exercises
+----------------------
+
+23_glob_matching.tcl
+    Finding files using glob patterns.
+
+24_regular_expressions.tcl
+    Basic regular-expression matching and extraction.
+
+25_log_parser.tcl
+    Searching a log file for error messages.
+
+26_data_extractor.tcl
+    Extracting structured values from text.
+
+
+Phase Completion
+----------------
+
+Phase 06 introduced pattern matching techniques required for
+searching files, parsing logs, and extracting information from
+text.
+
+These concepts form the foundation for more practical automation
+such as report parsing and EDA workflow automation.
+
+Next phase:
+
+Phase 07 — Error Handling

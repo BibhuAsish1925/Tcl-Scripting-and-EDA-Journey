@@ -1,5 +1,5 @@
 # Simple log parser
-
+# 1st created a test.log in the folder to test
 set filename "06_pattern_matching/test.log"
 
 set file [open $filename r]

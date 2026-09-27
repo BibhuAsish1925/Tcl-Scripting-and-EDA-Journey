@@ -1,0 +1,353 @@
+PHASE 07 — ERROR HANDLING
+=========================
+
+Purpose
+-------
+Error handling allows Tcl scripts to detect problems, handle them
+gracefully, and continue execution when appropriate.
+
+This is important in automation because scripts frequently work with
+files, user input, tool commands, and external data that may not
+always be valid or available.
+
+
+1. The catch Command
+--------------------
+
+The "catch" command executes a Tcl command and captures whether it
+generated an error.
+
+Syntax:
+
+catch {command} variable
+
+Example:
+
+set result [catch {expr {10 / 0}} error_message]
+
+The result variable contains the return code.
+
+Return codes:
+
+0
+    Command completed successfully.
+
+1
+    Command generated an error.
+
+
+2. Capturing Error Messages
+---------------------------
+
+The second argument of catch can store the error message.
+
+Example:
+
+set status [catch {open "missing.txt" r} error_message]
+
+if {$status != 0} {
+    puts "Error: $error_message"
+}
+
+This allows the script to report what went wrong instead of
+terminating immediately.
+
+
+3. Handling File Errors
+-----------------------
+
+File operations can fail for several reasons:
+
+- File does not exist
+- Incorrect file path
+- Permission problems
+- Invalid file operation
+
+Example:
+
+set status [catch {open "missing_file.txt" r} file]
+
+if {$status == 0} {
+    puts "File opened successfully"
+    close $file
+} else {
+    puts "Error opening file: $file"
+}
+
+
+4. Why catch Is Useful
+----------------------
+
+Without catch, an error can stop the Tcl script.
+
+Example:
+
+set file [open "missing.txt" r]
+
+puts "This line may not execute."
+
+With catch, the error can be handled:
+
+set status [catch {open "missing.txt" r} file]
+
+if {$status != 0} {
+    puts "File could not be opened"
+}
+
+puts "Script continues running."
+
+
+5. Input Validation
+-------------------
+
+Validation checks whether input is acceptable before processing it.
+
+Example:
+
+set module "UART"
+
+if {$module eq ""} {
+    puts "Error: Module name is empty"
+} else {
+    puts "Module: $module"
+}
+
+This prevents invalid or incomplete data from being processed.
+
+
+6. String Validation
+--------------------
+
+The "eq" operator compares strings.
+
+Example:
+
+if {$status eq "PASS"} {
+    puts "Test passed"
+}
+
+For string comparisons, use:
+
+eq
+    Equal
+
+ne
+    Not equal
+
+
+7. List-Based Validation
+------------------------
+
+The "ni" operator checks whether a value is NOT contained in a list.
+
+Example:
+
+set status "PASS"
+
+if {$status ni {PASS FAIL}} {
+    puts "Error: Invalid status"
+} else {
+    puts "Status: $status"
+}
+
+Valid values are:
+
+PASS
+FAIL
+
+Any other value is considered invalid.
+
+
+8. Numeric Validation
+---------------------
+
+Numeric values can be compared using operators such as:
+
+==
+    Equal
+
+!=
+    Not equal
+
+>
+    Greater than
+
+<
+    Less than
+
+>=
+    Greater than or equal
+
+<=
+    Less than or equal
+
+Example:
+
+set value 10
+
+if {$value < 0} {
+    puts "Error: Invalid value"
+}
+
+
+9. Error Handling Workflow
+--------------------------
+
+A common automation workflow is:
+
+Input
+  |
+  v
+Validate input
+  |
+  v
+Perform operation
+  |
+  v
+Check for errors
+  |
+  +------ Error ------+
+  |                   |
+  v                   v
+Handle error       Continue
+                      |
+                      v
+                   Result
+
+
+10. catch vs Validation
+-----------------------
+
+Validation checks whether input is acceptable before an operation.
+
+Example:
+
+if {$status ni {PASS FAIL}} {
+    puts "Invalid status"
+}
+
+catch handles errors that occur while executing a command.
+
+Example:
+
+set result [catch {open $filename r} error]
+
+Both techniques are useful and can be used together.
+
+
+11. Important Commands and Operators
+------------------------------------
+
+catch
+    Captures errors from Tcl commands.
+
+if
+    Performs conditional processing.
+
+eq
+    Compares strings for equality.
+
+ne
+    Compares strings for inequality.
+
+ni
+    Checks that a value is not present in a list.
+
+==
+    Numeric equality.
+
+!=
+    Numeric inequality.
+
+>
+    Greater than.
+
+<
+    Less than.
+
+>=
+    Greater than or equal.
+
+<=
+    Less than or equal.
+
+
+12. Practical Automation Uses
+-----------------------------
+
+Error handling is useful for:
+
+- Checking whether files exist
+- Handling failed file operations
+- Validating configuration values
+- Validating module names
+- Checking PASS/FAIL results
+- Handling invalid user input
+- Preventing scripts from terminating unexpectedly
+- Reporting useful error messages
+- Making automation scripts more reliable
+
+
+13. EDA Automation Applications
+-------------------------------
+
+In EDA automation, error handling can be used when:
+
+- A report file is missing
+- A required directory does not exist
+- A tool command fails
+- A configuration value is invalid
+- A report contains unexpected data
+- A required module or cell cannot be found
+
+For example:
+
+A script can attempt to read a timing report using catch.
+If the report does not exist, the script can report the problem
+and continue or terminate in a controlled way.
+
+
+14. Key Concepts Learned
+------------------------
+
+- Capturing errors with catch
+- Understanding catch return codes
+- Capturing error messages
+- Handling file-operation errors
+- Validating input
+- String validation
+- List-based validation
+- Numeric comparisons
+- Combining validation and error handling
+- Building more reliable automation scripts
+
+
+15. Phase 07 Exercises
+----------------------
+
+27_catch.tcl
+    Basic use of catch and error return codes.
+
+28_error_handling.tcl
+    Handling file-operation errors.
+
+29_validation.tcl
+    Validating input values before processing.
+
+
+Phase Completion
+----------------
+
+Phase 07 introduced the basic error-handling and validation
+techniques required to make Tcl automation scripts safer and
+more reliable.
+
+The next phase is:
+
+Phase 08 — Automation Utilities
+
+Topics:
+- Command execution
+- Environment variables
+- Command-line arguments
+- Building a complete automation script
