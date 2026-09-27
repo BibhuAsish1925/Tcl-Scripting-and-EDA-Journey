@@ -10,5 +10,11 @@ set result [add_numbers 20 15]
 
 puts "Result: $result"
 
+
+
+
+
+
+
 # Output:
 # Result: 35

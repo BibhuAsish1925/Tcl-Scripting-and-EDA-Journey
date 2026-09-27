@@ -12,6 +12,11 @@ show_message
 
 puts "Outside procedure: $message"
 
+
+
+
+
+
 # Output:
 # Inside procedure: Local message
 # Outside procedure: Global message

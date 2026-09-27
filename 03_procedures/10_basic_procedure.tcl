@@ -8,5 +8,10 @@ proc greet {} {
 # Call the procedure by using its name.
 greet
 
+
+
+
+
+
 # Output:
 # Hello from Tcl procedure!
