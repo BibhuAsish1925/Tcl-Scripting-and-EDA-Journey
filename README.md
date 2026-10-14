@@ -2,6 +2,13 @@
 
 A hands-on journey from **Tcl fundamentals to practical EDA/HDL automation**. The repository focuses on learning Tcl by building small scripts first and gradually applying the language to real VLSI/EDA-style workflows.
 
+<table align="center">
+  <tr>
+    <td align="center">
+      <img width="1312" height="1199" alt="image" src="https://github.com/user-attachments/assets/14534c09-183f-4169-a013-110f956e0544" /><br/>
+    </td>
+</table>
+
 ## Learning Path
 
 ```text
