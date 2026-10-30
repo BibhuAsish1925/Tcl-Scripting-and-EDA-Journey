@@ -1,0 +1,18 @@
+======================================
+          EDA DESIGN REPORT
+======================================
+
+Design Name       : EDA_DEMO_TOP
+Cell Count        : 1250
+Total Cell Area   : 5200.50
+Utilization       : 68.0%
+Timing Slack      : 0.35 ns
+Estimated Power   : 252.0 mW
+DRC Violations    : 3
+
+--------------------------------------
+DESIGN STATUS
+--------------------------------------
+Status: NEEDS REVIEW
+
+Report generated using Tcl automation.
