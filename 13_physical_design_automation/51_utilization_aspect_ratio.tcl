@@ -1,8 +1,3 @@
-# ==========================================
-# PHASE 13 - SCRIPT 51
-# UTILIZATION AND ASPECT RATIO
-# ==========================================
-
 puts "===== UTILIZATION AND ASPECT RATIO ====="
 
 # Design information

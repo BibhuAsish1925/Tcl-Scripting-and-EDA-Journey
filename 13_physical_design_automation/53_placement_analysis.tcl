@@ -1,8 +1,3 @@
-# ==========================================
-# PHASE 13 - SCRIPT 53
-# PLACEMENT ANALYSIS
-# ==========================================
-
 puts "===== PLACEMENT ANALYSIS ====="
 
 # Mock placed-cell data

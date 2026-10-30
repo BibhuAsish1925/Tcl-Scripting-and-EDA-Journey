@@ -1,9 +1,3 @@
-
-# ==========================================
-# PHASE 13 - SCRIPT 54
-# CLOCK TREE SYNTHESIS
-# ==========================================
-
 puts "===== CLOCK TREE SYNTHESIS ANALYSIS ====="
 
 # Mock clock-tree information

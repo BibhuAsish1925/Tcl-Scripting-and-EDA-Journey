@@ -1,8 +1,3 @@
-# ==========================================
-# PHASE 13 - SCRIPT 50
-# FLOORPLAN AREA CALCULATION
-# ==========================================
-
 puts "===== FLOORPLAN AREA CALCULATION ====="
 
 # Design parameters

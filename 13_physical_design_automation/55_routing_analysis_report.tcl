@@ -1,8 +1,3 @@
-# ==========================================
-# PHASE 13 - SCRIPT 55
-# ROUTING ANALYSIS AND REPORT
-# ==========================================
-
 puts "===== ROUTING ANALYSIS ====="
 
 # Mock routing information
