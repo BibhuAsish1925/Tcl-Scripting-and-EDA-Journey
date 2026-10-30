@@ -1,9 +1,3 @@
-
-# ==========================================
-# PHASE 14 - SCRIPT 59
-# DESIGN RULE CHECK
-# ==========================================
-
 puts "===== DESIGN RULE CHECK ====="
 
 # Example rule limits

@@ -1,9 +1,3 @@
-
-# ==========================================
-# PHASE 14 - SCRIPT 58
-# POWER ESTIMATION
-# ==========================================
-
 puts "===== POWER ESTIMATION ====="
 
 # Example design parameters

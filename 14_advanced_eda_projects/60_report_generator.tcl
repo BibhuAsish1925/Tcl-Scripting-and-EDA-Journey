@@ -1,9 +1,3 @@
-
-# ==========================================
-# PHASE 14 - SCRIPT 60
-# AUTOMATED EDA REPORT GENERATOR
-# ==========================================
-
 puts "===== EDA REPORT GENERATOR ====="
 
 # Mock design metrics

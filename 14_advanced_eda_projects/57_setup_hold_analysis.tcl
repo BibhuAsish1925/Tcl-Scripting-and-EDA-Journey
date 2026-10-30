@@ -1,9 +1,3 @@
-
-# ==========================================
-# PHASE 14 - SCRIPT 57
-# SETUP AND HOLD ANALYSIS
-# ==========================================
-
 puts "===== SETUP AND HOLD ANALYSIS ====="
 
 # Example timing data

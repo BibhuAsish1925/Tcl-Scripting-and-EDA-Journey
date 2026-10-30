@@ -1,9 +1,3 @@
-
-# ==========================================
-# PHASE 14 - SCRIPT 56
-# TIMING PATH ANALYSIS
-# ==========================================
-
 puts "===== TIMING PATH ANALYSIS ====="
 
 # Example timing path
