@@ -1,0 +1,16 @@
+EDA FLOW EXECUTION REPORT
+=========================
+Read : COMPLETED
+RTL : COMPLETED
+Elaborate : COMPLETED
+Design : COMPLETED
+Synthesis : COMPLETED
+Floorplanning : COMPLETED
+Placement : COMPLETED
+Timing : COMPLETED
+Analysis : COMPLETED
+Report : COMPLETED
+Generation : COMPLETED
+
+Total Stages: 11
+Completed Stages: 11

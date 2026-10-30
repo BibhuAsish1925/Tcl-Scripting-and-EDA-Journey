@@ -1,0 +1,12 @@
+PHYSICAL DESIGN ROUTING REPORT
+==============================
+Design: ALU_DESIGN
+Total Nets: 250
+Routed Nets: 245
+Unrouted Nets: 5
+Total Wirelength: 12500.0
+Routing Violations: 3
+Horizontal Congestion: 72.0%
+Vertical Congestion: 68.0%
+Routing Completion: 98.00%
+Routing Status: NEEDS REVIEW
