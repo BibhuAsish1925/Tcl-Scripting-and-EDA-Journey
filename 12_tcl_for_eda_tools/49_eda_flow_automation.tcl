@@ -1,8 +1,3 @@
-# ==========================================
-# PHASE 12 - SCRIPT 49
-# EDA FLOW AUTOMATION
-# ==========================================
-
 puts "===== EDA FLOW AUTOMATION ====="
 
 # Define workflow stages

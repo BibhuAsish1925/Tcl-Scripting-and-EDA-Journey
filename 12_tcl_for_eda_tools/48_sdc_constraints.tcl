@@ -1,8 +1,3 @@
-# ==========================================
-# PHASE 12 - SCRIPT 48
-# SDC CONSTRAINT GENERATION
-# ==========================================
-
 puts "===== SDC CONSTRAINT GENERATION ====="
 
 # Create output path relative to this script

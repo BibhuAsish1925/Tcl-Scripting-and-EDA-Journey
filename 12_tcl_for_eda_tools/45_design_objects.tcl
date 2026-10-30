@@ -1,8 +1,3 @@
-# ==========================================
-# PHASE 12 - SCRIPT 45
-# DESIGN OBJECTS
-# ==========================================
-
 puts "===== DESIGN OBJECTS DEMONSTRATION ====="
 
 # Mock standard-cell data

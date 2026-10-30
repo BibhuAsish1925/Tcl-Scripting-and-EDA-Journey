@@ -1,8 +1,3 @@
-# ==========================================
-# PHASE 12 - SCRIPT 46
-# COLLECTIONS AND FILTERS
-# ==========================================
-
 puts "===== COLLECTIONS AND FILTERS ====="
 
 set cells [list \

@@ -1,8 +1,3 @@
-# ==========================================
-# PHASE 12 - SCRIPT 44
-# EDA TOOL ENVIRONMENT
-# ==========================================
-
 puts "===== EDA TOOL ENVIRONMENT ====="
 
 # Tcl interpreter information

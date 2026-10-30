@@ -1,8 +1,3 @@
-# ==========================================
-# PHASE 12 - SCRIPT 47
-# DESIGN ATTRIBUTES
-# ==========================================
-
 puts "===== DESIGN ATTRIBUTES ====="
 
 # Create a mock cell object

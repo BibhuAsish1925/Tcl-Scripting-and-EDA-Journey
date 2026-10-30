@@ -1,8 +1,3 @@
-# ==========================================
-# PHASE 11 - VARIABLE SCOPE AND TRACE
-# Topics: upvar, uplevel, trace
-# ==========================================
-
 puts "===== VARIABLE SCOPE AND TRACE DEMO ====="
 
 # ------------------------------------------
